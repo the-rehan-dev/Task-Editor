@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Editor</title>
+    <link rel="shortcut icon" href="/img/task-editor.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1 class="heading">Task Editor</h1>
+      <form id="taskForm" class="addTask" autocomplete="off">
+        <label for="inputBox" class="sr-only">New task</label>
+        <input
+          id="inputBox"
+          type="text"
+          placeholder="What needs to be done?"
+          class="inputBox"
+          maxlength="120"
+        />
+        <button id="addtaskBtn" class="addBtn" type="submit">Add</button>
+      </form>
+
+      <p id="errorMsg" class="errorMsg" role="alert" aria-live="polite"></p>
+
+      <div class="toolbar" id="toolbar" hidden>
+        <span id="counter" class="counter"></span>
+        <div class="filters">
+          <button class="filterBtn active" data-filter="all" type="button">
+            All
+          </button>
+          <button class="filterBtn" data-filter="active" type="button">
+            Active
+          </button>
+          <button class="filterBtn" data-filter="done" type="button">
+            Done
+          </button>
+        </div>
+        <button id="clearDone" class="clearBtn" type="button">
+          Clear done
+        </button>
+      </div>
+
+      <ul id="showTask" class="showTask"></ul>
+
+      <p id="emptyMsg" class="emptyMsg">
+        No tasks yet. Add your first one above!
+      </p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

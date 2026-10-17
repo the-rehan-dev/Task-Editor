@@ -1,0 +1,229 @@
+
+:root {
+    --bg-1: #0f1b4c;
+    --bg-2: #2a1a5e;
+    --card: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.18);
+    --text: #f1f4ff;
+    --muted: #a9b4e0;
+    --accent: #5b8cff;
+    --accent-hover: #4374f0;
+    --danger: #ff5c6c;
+    --success: #34d399;
+}
+html {
+    scrollbar-width: thin; 
+    scrollbar-color: var(--card-border) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+   
+    background: linear-gradient(135deg, var(--bg-1), var(--bg-2)) fixed;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+
+.app {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.heading {
+    text-align: center;
+    font-size: clamp(2rem, 6vw, 3rem); 
+    margin: 30px 0;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #ffd89b, #ff9a9e); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.addTask {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.inputBox {
+    flex: 1; 
+    height: 50px;
+    border: 2px solid var(--card-border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 25px;
+    padding: 0 20px;
+    font-size: 1.05rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.inputBox::placeholder { color: var(--muted); }
+
+.inputBox:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(91, 140, 255, 0.25);
+}
+
+.inputBox.invalid { border-color: var(--danger); }
+
+.addBtn {
+    height: 50px;
+    padding: 0 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.addBtn:hover { background: var(--accent-hover); }
+.addBtn:active { transform: scale(0.96); } 
+.addBtn:focus-visible,
+.filterBtn:focus-visible,
+.clearBtn:focus-visible,
+.removeBtn:focus-visible { outline: 3px solid #ffd89b; outline-offset: 2px; }
+
+
+.errorMsg {
+    min-height: 1.4em;
+    color: var(--danger);
+    font-size: 0.9rem;
+    padding-left: 20px;
+    margin-bottom: 12px;
+}
+
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+.toolbar[hidden] { display: none; }
+
+.filters { display: flex; gap: 6px; }
+
+.filterBtn, .clearBtn {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--muted);
+    border-radius: 15px;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.filterBtn:hover, .clearBtn:hover { color: var(--text); border-color: var(--text); }
+.filterBtn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+
+.showTask { list-style: none; }
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 14px;
+    backdrop-filter: blur(6px);
+    animation: slideIn 0.25s ease; 
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.task input[type="checkbox"] {
+    width: 20px; height: 20px;
+    accent-color: var(--success);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.taskText {
+    flex: 1;
+    font-size: 1.1rem;
+    word-break: break-word; 
+    cursor: text;
+}
+
+
+.task.done .taskText { text-decoration: line-through; color: var(--muted); }
+
+
+.editInput {
+    flex: 1;
+    font-size: 1.1rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    background: rgba(0, 0, 0, 0.25);
+    color: var(--text);
+    outline: none;
+}
+
+
+.removeBtn {
+    background: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    border-radius: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.removeBtn:hover { background: var(--danger); color: #fff; }
+
+.emptyMsg {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 40px;
+}
+.emptyMsg[hidden] { display: none; }
+
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+}
+
+@media (max-width: 480px) {
+    .addBtn { padding: 0 18px; }
+    .toolbar { justify-content: center; }
+}
